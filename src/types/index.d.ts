@@ -15,3 +15,19 @@ export interface User {
   email: string;
   avatar?: string;
 }
+
+export interface ScheduleProps {
+  id: number;
+  title: string;
+  date: string;
+  time: string;
+  available?: boolean;
+}
+
+export interface AppointmentProps {
+  id: number;
+  name: string;
+  message: string;
+  schedule: ScheduleProps[];
+  review?: string;
+}

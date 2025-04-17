@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AuthLayouts from '../layouts/auth-layouts'
 import { LoaderCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -6,34 +6,53 @@ import { Input } from '@/components/ui/input'
 import { Link, useNavigate } from 'react-router-dom'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
+import { useAuth } from '@/context/auth-context'
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { loginSchema } from '@/schemas/login-schema'
+import { z } from 'zod'
 
-type LoginForm = {
-    email: string,
-    password: string
-}
+type LoginForm = z.infer<typeof loginSchema>
 
 export default function Login() {
-    const [formData, setFormData] = useState<LoginForm>({ email: "", password: "" });
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
+        resolver: zodResolver(loginSchema),
+        mode: "onSubmit",
+    });
+
     const [processing, setProcessing] = useState(false);
+    const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleLogin = async (data: LoginForm) => {
         setProcessing(true);
 
-        setTimeout(() => {
-            try {
-                const loginSuccess = true;
-                if (loginSuccess) {
-                    navigate('/')
-                } else {
-                    toast.error("Email atau Password salah!")
-                }
-            } finally {
-                setProcessing(false);
+        try {
+            const loginSuccess = await login(data);
+            if (loginSuccess) {
+                navigate('/schedule')
+            } else {
+                toast.error("Incorrect Email and Password!")
             }
-        }, 1000)
+        } catch (error) {
+            console.log(error);
+            toast.error('Login failed! Try again later.');
+        } finally {
+            setProcessing(false);
+        }
     }
+
+    useEffect(() => {
+        if (errors.email) {
+            toast.error(errors.email.message);
+        } else if (errors.password) {
+            toast.error(errors.password.message);
+        }
+    }, [errors])
+
+    useEffect(() => {
+        document.title = "Login | Photographer Appointment"
+    }, [])
 
     return (
         <AuthLayouts>
@@ -47,19 +66,17 @@ export default function Login() {
                 </div>
 
                 {/* Form */}
-                <form className="flex flex-col gap-6" onSubmit={handleSubmit} >
+                <form className="flex flex-col gap-6" onSubmit={handleSubmit(handleLogin)} >
                     <div className="grid gap-6">
                         <div className="grid gap-2">
                             <Label htmlFor="email">Email address</Label>
                             <Input
                                 id="email"
                                 type="email"
-                                required
                                 autoFocus
                                 tabIndex={1}
                                 autoComplete="email"
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                {...register("email")}
                                 placeholder="email@example.com"
                             />
                         </div>
@@ -69,11 +86,9 @@ export default function Login() {
                             <Input
                                 id="password"
                                 type="password"
-                                required
                                 tabIndex={2}
                                 autoComplete="current-password"
-                                value={formData.password}
-                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                {...register("password")}
                                 placeholder="Password"
                             />
                         </div>

@@ -11,6 +11,6 @@ export default function PageTitle({ title }: PageTitleProps) {
     }, [title])
 
     return (
-        <h1 className='font-bold text-4xl mb-2'>{title}</h1>
+        <h1 className='font-bold text-4xl mb-2 text-center'>{title}</h1>
     )
 }

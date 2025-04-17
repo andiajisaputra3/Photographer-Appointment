@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Camera } from 'lucide-react'
+import ImageLogin from '../../assets/images/img-login.jpg'
 
 interface AuthLayoutProps {
     children: React.ReactNode
@@ -6,15 +7,28 @@ interface AuthLayoutProps {
 
 export default function AuthLayouts({ children }: AuthLayoutProps) {
     return (
-        <div className="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
-            <div className="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
-                <div className="absolute inset-0 bg-zinc-900" />
-                <Link to="/" className="relative z-20 flex items-center text-lg font-medium">
-                    Photographer Appointment
-                </Link>
+        <div className="grid min-h-svh lg:grid-cols-2">
+            <div className="relative hidden bg-muted lg:block">
+                <img
+                    src={ImageLogin}
+                    alt="Image"
+                    className="absolute inset-0 w-full h-full object-cover dark:brightness-[0.2] dark:grayscale"
+                />
+                <div className='absolute top-8 left-6 z-10'>
+                    <a href="#" className="flex items-center gap-2 text-white font-bold">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                            <Camera className="size-6" />
+                        </div>
+                        Photograper Appointment
+                    </a>
+                </div>
             </div>
-            <div className="w-full lg:p-8">
-                {children}
+            <div className="flex flex-col p-6 md:p-10 bg-slate-50">
+                <div className="flex flex-1 items-center justify-center">
+                    <div className="w-full max-w-xs">
+                        {children}
+                    </div>
+                </div>
             </div>
         </div>
     )
