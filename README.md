@@ -1,54 +1,87 @@
-# React + TypeScript + Vite
+# 📅 Photographer Appointment Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikasi ini adalah aplikasi Photographer Appointment berbasis **React + Vite + Typescript** yang memungkinkan pengguna untuk login, melihat daftar janji temu, serta memberikan ulasan terhadap janji temu yang telah dijadwalkan.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Fitur Utama
 
-## Expanding the ESLint configuration
+- Login menggunakan email dan password (mock / simulasi).
+- Melihat daftar janji temu.
+- Memberikan ulasan terhadap janji temu.
+- Validasi form menggunakan `react-hook-form` dan `zod`.
+- Menyimpan data secara lokal menggunakan `localStorage`.
+- Antarmuka bersih dan responsif menggunakan Tailwind CSS.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠️ Cara Instalasi dan Menjalankan Aplikasi
+
+### 1. Clone Repositori
+
+```bash
+git clone https://github.com/andiajisaputra3/Photographer-Apppointment.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Masuk ke Direktori Proyek
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+cd Photographer-Apppointment
 ```
+
+### 3. Install Dependensi
+
+```bash
+npm install
+```
+
+### 4. Jalankan Aplikasi
+
+```bash
+npm start
+```
+
+Aplikasi akan berjalan di `http://localhost:5173`.
+
+---
+
+## ✅ Asumsi
+
+- Pengguna menggunakan browser modern.
+- Aplikasi digunakan di perangkat pribadi karena data disimpan di `localStorage`.
+- Login tidak menggunakan backend, hanya validasi sederhana di frontend.
+- Semua data janji temu dan ulasan disimpan di browser.
+
+---
+
+## 🔐 Kredensial (Mock)
+
+Aplikasi ini menggunakan kredensial mock (simulasi login tanpa backend). Kamu bisa login menggunakan data berikut:
+
+```text
+Email: jhondoe@gmail.com
+Password: password
+```
+
+Jika login gagal, pastikan kamu memakai email dan password yang sesuai seperti di atas.
+
+---
+
+## ⚠️ Keterbatasan
+
+- Login hanya mock, tidak ada autentikasi sesungguhnya.
+- Semua data disimpan di browser lokal, tidak sinkron dengan perangkat lain.
+- Tidak ada fitur register.
+
+---
+
+## 🔧 Pengembangan yang Direkomendasikan
+
+- Menambahkan koneksi ke backend (misalnya Firebase atau Express API).
+- Menambahkan autentikasi JWT untuk login asli.
+- Validasi review lebih ketat (misalnya memblokir kata kasar).
+- Menambahkan fitur edit/hapus janji temu.
+- Menambahkan unit/component testing.
+- Menyimpan data janji temu ke database online.
+
+---
