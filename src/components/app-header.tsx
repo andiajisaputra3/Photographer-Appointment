@@ -70,7 +70,7 @@ export default function AppHeader() {
 
                 <Link to="/schedule" className="flex items-center space-x-2">
                     <span className=" w-24 fill-current font-bold text-xl text-white dark:text-white">
-                        Photograper
+                        Photographer
                     </span>
                 </Link>
 

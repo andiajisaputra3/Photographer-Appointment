@@ -41,11 +41,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = async (data: LoginType): Promise<boolean> => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                if (data.email === "indra@gmail.com" && data.password === "password") {
+                if (data.email === "jhondoe@gmail.com" && data.password === "password") {
                     const fakeToken = "fake-token-12345678";
                     const fakeUser = {
                         id: 1,
-                        name: "Indra Puja",
+                        name: "Jhon Doe",
                         email: data.email,
                     }
 
